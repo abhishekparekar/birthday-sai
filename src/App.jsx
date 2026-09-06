@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useAudioEngine } from './hooks/useAudioEngine'
 import { ParticleCanvas } from './components/common/ParticleCanvas'
 import { FireworksCanvas } from './components/common/FireworksCanvas'
+import { ThreeCakeCanvas } from './components/common/ThreeCakeCanvas'
 import { ProgressNav } from './components/common/ProgressNav'
 
 import { SuspenseLoader } from './components/common/SuspenseLoader'
@@ -70,6 +71,9 @@ export default function App() {
           <SuspenseLoader onComplete={handleLoadingComplete} audioEngine={audioEngine} />
         )}
       </AnimatePresence>
+
+      {/* 🎂 Cinematic 3D Birthday Cake Rises Background */}
+      <ThreeCakeCanvas />
 
       {/* Background Ambience */}
       <ParticleCanvas speed={0.8} density={40} />
