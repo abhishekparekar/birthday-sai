@@ -72,8 +72,8 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 🌌 Cinematic "Blue & Night" 3D Space Background */}
-      <ThreeSpaceCanvas />
+      {/* 🌌 Cinematic "Blue & Night" 3D Space Background with Warp Loading Effect */}
+      <ThreeSpaceCanvas currentStep={currentStep} isLoading={isLoading} />
 
       {/* Background Ambience */}
       <ParticleCanvas speed={0.8} density={40} colors={['#38BDF8', '#60A5FA', '#93C5FD', '#FBBF24', '#FFFFFF']} />

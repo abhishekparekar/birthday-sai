@@ -8,8 +8,10 @@ import {
   X,
   Music,
   ExternalLink,
+  Sparkles,
 } from 'lucide-react'
 import { birthdayData } from '../../data/birthdayData'
+import saiImg from '../../assets/sai3.jpeg'
 
 export function GrandFinale({ onRestart, audioEngine }) {
   const [showLastModal, setShowLastModal] = useState(false)
@@ -37,34 +39,57 @@ export function GrandFinale({ onRestart, audioEngine }) {
   }, [audioEngine])
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center p-6 py-20 text-center select-none overflow-hidden">
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 py-16 text-center select-none overflow-hidden">
       {/* Radiant Aura background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-pink-600/25 via-purple-600/25 to-amber-400/25 blur-[160px] animate-pulse-glow" />
       </div>
 
-      <div className="max-w-3xl w-full z-20 space-y-10">
+      <div className="max-w-3xl w-full z-20 space-y-6 sm:space-y-8 flex flex-col items-center">
         {/* Crown Badge */}
         <div>
           <motion.div
             initial={{ scale: 0, rotate: -20 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 0.6, type: 'spring' }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel text-sm font-bold tracking-widest text-amber-300 border border-amber-400/40 glow-gold"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full glass-panel text-xs sm:text-sm font-bold tracking-widest text-amber-300 border border-amber-400/40 glow-gold"
           >
-            <Crown className="w-5 h-5 text-amber-400 fill-amber-400" />
+            <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 fill-amber-400" />
             <span>CELEBRATING OUR HERO</span>
-            <Crown className="w-5 h-5 text-amber-400 fill-amber-400" />
+            <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 fill-amber-400" />
           </motion.div>
         </div>
 
+        {/* 🌟 Royal Hero Portrait of Sai */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8, type: 'spring' }}
+          className="relative"
+        >
+          <div className="absolute -inset-3 bg-gradient-to-r from-amber-400 via-pink-500 to-cyan-400 rounded-full blur-xl opacity-75 animate-pulse-glow" />
+          <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full p-1.5 bg-gradient-to-tr from-amber-400 via-pink-500 to-sky-400 shadow-2xl glow-gold">
+            <div className="w-full h-full rounded-full overflow-hidden bg-zinc-950 border-2 border-white/20">
+              <img
+                src={saiImg}
+                alt="Birthday Star Sai"
+                className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-black/90 border border-amber-400 text-amber-300 text-[11px] font-black tracking-widest flex items-center gap-1 shadow-lg">
+              <Sparkles className="w-3 h-3 text-amber-400" />
+              <span>SAI 7TH SEPT</span>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Grand Title & Name */}
-        <div className="space-y-4">
+        <div className="space-y-2">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-4xl sm:text-7xl font-black font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-amber-300"
+            className="text-3xl sm:text-5xl md:text-6xl font-black font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-amber-200"
           >
             {grandFinale.title}
           </motion.h1>
@@ -73,7 +98,7 @@ export function GrandFinale({ onRestart, audioEngine }) {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8, type: 'spring' }}
-            className="text-6xl sm:text-8xl md:text-9xl font-black font-cinzel text-glow-gold text-amber-400"
+            className="text-6xl sm:text-8xl md:text-9xl font-black font-cinzel-decor text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-500 text-glow-gold drop-shadow-2xl"
           >
             {grandFinale.name} ❤️
           </motion.div>

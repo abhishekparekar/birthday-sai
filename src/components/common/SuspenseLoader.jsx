@@ -62,11 +62,16 @@ export function SuspenseLoader({ onComplete, audioEngine }) {
     <div
       onClick={handleManualTap}
       onTouchStart={handleManualTap}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-[#180a32] via-[#0e0520] to-[#06020c] text-center select-none overflow-hidden cursor-pointer"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-[#04081c]/75 via-[#020514]/65 to-[#010208]/80 backdrop-blur-[2px] text-center select-none overflow-hidden cursor-pointer"
     >
-      {/* Radiant Glowing Background Ambience */}
-      <div className="absolute w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-pink-600/20 blur-[120px] sm:blur-[160px] animate-pulse-glow pointer-events-none" />
-      <div className="absolute w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-amber-500/15 blur-[100px] sm:blur-[140px] animate-pulse pointer-events-none" />
+      {/* 🌌 Radiant Cosmic Space Ambient Lighting */}
+      <div className="absolute w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] rounded-full bg-cyan-500/15 blur-[120px] sm:blur-[160px] animate-pulse pointer-events-none" />
+      <div className="absolute w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-purple-600/15 blur-[100px] sm:blur-[140px] animate-pulse pointer-events-none" />
+      <div className="absolute w-[250px] sm:w-[450px] h-[250px] sm:h-[450px] rounded-full bg-amber-500/10 blur-[80px] sm:blur-[120px] pointer-events-none" />
+
+      {/* Cosmic Warp Rings Animation */}
+      <div className="absolute w-[340px] sm:w-[520px] h-[340px] sm:h-[520px] rounded-full border border-cyan-400/20 animate-spin pointer-events-none" style={{ animationDuration: '12s' }} />
+      <div className="absolute w-[440px] sm:w-[680px] h-[440px] sm:h-[680px] rounded-full border border-purple-500/15 animate-spin pointer-events-none" style={{ animationDuration: '18s', animationDirection: 'reverse' }} />
 
       <div className="max-w-md w-full z-10 space-y-6 sm:space-y-7 flex flex-col items-center px-2">
         {/* Animated Glowing Orbital Badge */}

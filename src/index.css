@@ -24,6 +24,14 @@
     font-family: 'Cinzel', serif;
   }
 
+  .font-cinzel-decor {
+    font-family: 'Cinzel Decorative', serif;
+  }
+
+  .font-alex {
+    font-family: 'Alex Brush', cursive;
+  }
+
   .font-playfair {
     font-family: 'Playfair Display', serif;
   }
@@ -31,6 +39,29 @@
   .font-script {
     font-family: 'Dancing Script', cursive;
   }
+
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .font-outfit {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Luxury Portrait Frame Styling */
+.portrait-gold-ring {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.9) 0%, rgba(236, 72, 153, 0.8) 50%, rgba(56, 189, 248, 0.9) 100%);
+  padding: 3px;
+  border-radius: 28px;
+  box-shadow: 0 0 35px -5px rgba(251, 191, 36, 0.6), 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.portrait-gold-ring-inner {
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  background: #020617;
 }
 
 /* Luxury Glassmorphism Styles */
