@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Laugh, ArrowRight, Flame, ShieldAlert, Sparkles, RefreshCw } from 'lucide-react'
+import { Laugh, ArrowRight, Flame, RefreshCw } from 'lucide-react'
 import { birthdayData } from '../../data/birthdayData'
 
 export function FunnyZone({ onNext, audioEngine }) {
@@ -31,15 +31,15 @@ export function FunnyZone({ onNext, audioEngine }) {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-black tracking-widest uppercase animate-bounce">
             <Flame className="w-4 h-4 text-orange-400" />
-            <span>CRITICAL REALITY CHECK</span>
+            <span>Chapter 06: The Real Sai Exposed</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black font-cinzel text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-pink-500">
             ENOUGH EMOTIONAL DRAMA! 😂
           </h2>
 
-          <p className="text-zinc-300 text-base sm:text-lg max-w-lg mx-auto font-medium">
-            Now let's talk about the <span className="text-pink-400 font-bold">REAL YOU</span>. Tap any card below to expose the classified truth! 😈
+          <p className="text-zinc-200 text-base sm:text-lg max-w-lg mx-auto font-medium">
+            Now let's talk about the <span className="text-pink-400 font-bold">REAL SAI</span>. Tap any card below to reveal the hilarious classified truth! 😈
           </p>
         </motion.div>
 
@@ -82,7 +82,7 @@ export function FunnyZone({ onNext, audioEngine }) {
                   <span className="flex items-center gap-1 text-amber-400/80">
                     <RefreshCw className="w-3 h-3" /> Tap to toggle
                   </span>
-                  <span className="font-mono text-[10px] text-zinc-500">100% ACCURATE</span>
+                  <span className="font-mono text-[10px] text-zinc-500">100% CERTIFIED ACCURATE</span>
                 </div>
               </motion.div>
             )
@@ -103,7 +103,7 @@ export function FunnyZone({ onNext, audioEngine }) {
             }}
             className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-pink-600 to-purple-600 hover:scale-105 font-bold text-white text-base sm:text-lg shadow-xl shadow-amber-500/20 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
           >
-            <span>UNLOCK 6 SURPRISE GIFTS</span>
+            <span>ENTER THE 1-MIN SUSPENSE SPINNER 🎡</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </motion.div>

@@ -1,6 +1,5 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
-// Global AudioContext singleton - initialized ONLY on user gesture
 let globalAudioCtx = null
 
 function getAudioCtx() {
@@ -33,7 +32,7 @@ export function useAudioEngine() {
     setIsMuted((prev) => !prev)
   }, [])
 
-  // 1. Mystery low resonant hum
+  // 1. Low Resonant Mystery Drone
   const playMystery = useCallback(() => {
     if (isMuted) return
     const ctx = getAudioCtx()
@@ -64,7 +63,7 @@ export function useAudioEngine() {
     } catch (e) {}
   }, [isMuted])
 
-  // 2. Shock Boom / Impact
+  // 2. Shock Boom Impact
   const playBoom = useCallback(() => {
     if (isMuted) return
     const ctx = getAudioCtx()
@@ -74,19 +73,19 @@ export function useAudioEngine() {
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
       osc.type = 'sine'
-      osc.frequency.setValueAtTime(150, ctx.currentTime)
-      osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.8)
+      osc.frequency.setValueAtTime(160, ctx.currentTime)
+      osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.9)
 
-      gain.gain.setValueAtTime(0.6, ctx.currentTime)
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8)
+      gain.gain.setValueAtTime(0.65, ctx.currentTime)
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.9)
 
       osc.connect(gain)
       gain.connect(ctx.destination)
 
       osc.start()
-      osc.stop(ctx.currentTime + 0.8)
+      osc.stop(ctx.currentTime + 0.9)
 
-      const bufferSize = ctx.sampleRate * 0.35
+      const bufferSize = ctx.sampleRate * 0.4
       const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
       const data = buffer.getChannelData(0)
       for (let i = 0; i < bufferSize; i++) {
@@ -96,12 +95,12 @@ export function useAudioEngine() {
       noise.buffer = buffer
       const noiseFilter = ctx.createBiquadFilter()
       noiseFilter.type = 'lowpass'
-      noiseFilter.frequency.setValueAtTime(800, ctx.currentTime)
-      noiseFilter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.35)
+      noiseFilter.frequency.setValueAtTime(850, ctx.currentTime)
+      noiseFilter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.4)
 
       const noiseGain = ctx.createGain()
-      noiseGain.gain.setValueAtTime(0.35, ctx.currentTime)
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35)
+      noiseGain.gain.setValueAtTime(0.4, ctx.currentTime)
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4)
 
       noise.connect(noiseFilter)
       noiseFilter.connect(noiseGain)
@@ -111,7 +110,7 @@ export function useAudioEngine() {
     } catch (e) {}
   }, [isMuted])
 
-  // 3. Magical Sparkling Chimes (for Gift / Reveal)
+  // 3. Magical Chimes
   const playMagic = useCallback(() => {
     if (isMuted) return
     const ctx = getAudioCtx()
@@ -138,34 +137,34 @@ export function useAudioEngine() {
     } catch (e) {}
   }, [isMuted])
 
-  // 4. Emotional Piano Chord
+  // 4. Emotional Piano Chord for Marathi Letter
   const playEmotionalChord = useCallback(() => {
     if (isMuted) return
     const ctx = getAudioCtx()
     if (!ctx || ctx.state === 'suspended') return
 
     try {
-      const freqs = [261.63, 329.63, 392.0, 493.88, 523.25]
+      const freqs = [261.63, 329.63, 392.0, 493.88, 523.25, 659.25]
       freqs.forEach((f, i) => {
         const osc = ctx.createOscillator()
         const gain = ctx.createGain()
         osc.type = 'triangle'
-        osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.05)
+        osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.06)
 
-        gain.gain.setValueAtTime(0.15, ctx.currentTime + i * 0.05)
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.5)
+        gain.gain.setValueAtTime(0.18, ctx.currentTime + i * 0.06)
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 3.0)
 
         osc.connect(gain)
         gain.connect(ctx.destination)
 
-        osc.start(ctx.currentTime + i * 0.05)
-        osc.stop(ctx.currentTime + 2.6)
+        osc.start(ctx.currentTime + i * 0.06)
+        osc.stop(ctx.currentTime + 3.1)
       })
     } catch (e) {}
   }, [isMuted])
 
-  // 5. Wheel Mechanical Tick
-  const playTick = useCallback(() => {
+  // 5. Dynamic Mechanical Tick with Pitch Modulation (for 1-min decelerating wheel)
+  const playDynamicTick = useCallback((pitchMultiplier = 1, volume = 0.2) => {
     if (isMuted) return
     const ctx = getAudioCtx()
     if (!ctx || ctx.state === 'suspended') return
@@ -174,21 +173,51 @@ export function useAudioEngine() {
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
       osc.type = 'sine'
-      osc.frequency.setValueAtTime(1200, ctx.currentTime)
-      osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.03)
+      const baseFreq = 900 * pitchMultiplier
+      osc.frequency.setValueAtTime(baseFreq, ctx.currentTime)
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.3, ctx.currentTime + 0.035)
 
-      gain.gain.setValueAtTime(0.18, ctx.currentTime)
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03)
+      gain.gain.setValueAtTime(Math.min(0.35, volume), ctx.currentTime)
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035)
 
       osc.connect(gain)
       gain.connect(ctx.destination)
 
       osc.start()
-      osc.stop(ctx.currentTime + 0.03)
+      osc.stop(ctx.currentTime + 0.035)
     } catch (e) {}
   }, [isMuted])
 
-  // 6. Pop / Click
+  // 6. Funny Record Scratch
+  const playScratch = useCallback(() => {
+    if (isMuted) return
+    const ctx = getAudioCtx()
+    if (!ctx || ctx.state === 'suspended') return
+
+    try {
+      const bufferSize = ctx.sampleRate * 0.3
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
+      const data = buffer.getChannelData(0)
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.sin((i / bufferSize) * Math.PI * 8)
+      }
+
+      const noise = ctx.createBufferSource()
+      noise.buffer = buffer
+      noise.playbackRate.setValueAtTime(1.6, ctx.currentTime)
+      noise.playbackRate.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.28)
+
+      const gain = ctx.createGain()
+      gain.gain.setValueAtTime(0.35, ctx.currentTime)
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3)
+
+      noise.connect(gain)
+      gain.connect(ctx.destination)
+      noise.start()
+    } catch (e) {}
+  }, [isMuted])
+
+  // 7. Pop / Button Tap
   const playPop = useCallback(() => {
     if (isMuted) return
     const ctx = getAudioCtx()
@@ -212,7 +241,7 @@ export function useAudioEngine() {
     } catch (e) {}
   }, [isMuted])
 
-  // 7. Birthday Melody / Fanfare
+  // 8. Birthday Fanfare Melody
   const playFanfare = useCallback(() => {
     if (isMuted) return
     const ctx = getAudioCtx()
@@ -259,7 +288,8 @@ export function useAudioEngine() {
     playBoom,
     playMagic,
     playEmotionalChord,
-    playTick,
+    playDynamicTick,
+    playScratch,
     playPop,
     playFanfare,
   }

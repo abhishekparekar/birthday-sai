@@ -9,11 +9,13 @@ import { ProgressNav } from './components/common/ProgressNav'
 import { MysteryIntro } from './components/Intro/MysteryIntro'
 import { ShockReveal } from './components/Reveal/ShockReveal'
 import { BirthdayReveal } from './components/Reveal/BirthdayReveal'
+import { BestWishers } from './components/Wishers/BestWishers'
 import { EmotionalLetter } from './components/Letter/EmotionalLetter'
+import { FunnyZone } from './components/Funny/FunnyZone'
 import { SpinWheel } from './components/Wheel/SpinWheel'
 import { GrandFinale } from './components/Finale/GrandFinale'
 
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 8
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0)
@@ -60,7 +62,7 @@ export default function App() {
     <main className="relative min-h-screen w-full bg-[#050505] text-white flex flex-col justify-center items-center overflow-x-hidden">
       {/* Background Ambience */}
       <ParticleCanvas speed={0.8} density={50} />
-      <FireworksCanvas active={currentStep === 2 || currentStep === 5} />
+      <FireworksCanvas active={currentStep === 2 || currentStep === 7} />
 
       {/* Persistent Audio Controls */}
       <SoundToggle isMuted={audioEngine.isMuted} onToggle={audioEngine.toggleMute} />
@@ -116,13 +118,39 @@ export default function App() {
               transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <EmotionalLetter onNext={handleNextStep} audioEngine={audioEngine} />
+              <BestWishers onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
           {currentStep === 4 && (
             <motion.section
               key="step-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6 }}
+              className="w-full"
+            >
+              <EmotionalLetter onNext={handleNextStep} audioEngine={audioEngine} />
+            </motion.section>
+          )}
+
+          {currentStep === 5 && (
+            <motion.section
+              key="step-5"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.5 }}
+              className="w-full"
+            >
+              <FunnyZone onNext={handleNextStep} audioEngine={audioEngine} />
+            </motion.section>
+          )}
+
+          {currentStep === 6 && (
+            <motion.section
+              key="step-6"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
@@ -133,9 +161,9 @@ export default function App() {
             </motion.section>
           )}
 
-          {currentStep === 5 && (
+          {currentStep === 7 && (
             <motion.section
-              key="step-5"
+              key="step-7"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
