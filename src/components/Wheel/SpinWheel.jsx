@@ -6,54 +6,46 @@ import {
   ArrowRight,
   X,
   Trophy,
-  Flame,
   Clock,
-  Sparkles,
   Zap,
   FastForward,
 } from 'lucide-react'
 import { birthdayData } from '../../data/birthdayData'
 
-const SPIN_DURATION_MS = 60000 // 1 Full Minute (60 seconds)
-
+const SPIN_DURATION_MS = 15000 // 15 Seconds Epic Spin
+ 
 export function SpinWheel({ onNext, audioEngine }) {
   const [spinning, setSpinning] = useState(false)
   const [rotation, setRotation] = useState(0)
   const [prize, setPrize] = useState(null)
-  const [timeLeft, setTimeLeft] = useState(60)
+  const [timeLeft, setTimeLeft] = useState(15)
   const [spinPhase, setSpinPhase] = useState('READY')
   const { wheelOptions } = birthdayData
 
   const spinStartTimeRef = useRef(0)
   const spinAnimationFrameRef = useRef(null)
-  const tickTimerRef = useRef(null)
   const selectedPrizeRef = useRef(null)
 
   const numSlices = wheelOptions.length
   const anglePerSlice = 360 / numSlices
 
-  // 1-Minute Custom Velocity Easing: Fast -> Medium -> Slow -> Low -> Down -> End
+  // 15-Second Custom Velocity Easing: Very Fast -> Mid -> Slow -> End
   const calculateRotation = (progress) => {
-    // Custom cubic-bezier like deceleration curve mapped over 60 seconds
-    // Fast initial surge, long sustained cruise, gradual brake, dramatic crawl at end
     const p = progress
     let ease
-    if (p < 0.25) {
-      // 0-15s: Blazing fast rotation
-      ease = p * 2.5
-    } else if (p < 0.6) {
-      // 15-36s: Medium-fast cruising
-      ease = 0.625 + (p - 0.25) * 1.5
-    } else if (p < 0.82) {
-      // 36-49s: Noticeable deceleration
-      ease = 1.15 + (p - 0.6) * 0.9
-    } else if (p < 0.95) {
-      // 49-57s: Very slow suspense
-      ease = 1.348 + (p - 0.82) * 0.35
+    if (p < 0.30) {
+      // 1. VERY FAST (0-4.5s): Hyper supersonic spinning
+      ease = p * 2.3
+    } else if (p < 0.60) {
+      // 2. MID (4.5-9s): Steady cruising rotation
+      ease = 0.69 + (p - 0.30) * 1.35
+    } else if (p < 0.83) {
+      // 3. SLOW (9-12.5s): Dramatic deceleration suspense
+      ease = 1.095 + (p - 0.60) * 0.72
     } else {
-      // 57-60s: Down to crawl / target lock
-      const tail = (p - 0.95) / 0.05
-      ease = 1.3935 + (1 - Math.pow(1 - tail, 3)) * 0.03
+      // 4. END (12.5-15s): Micro-stepping into winning slice
+      const tail = (p - 0.83) / 0.17
+      ease = 1.26 + (1 - Math.pow(1 - tail, 3)) * 0.05
     }
     return ease
   }
@@ -63,20 +55,20 @@ export function SpinWheel({ onNext, audioEngine }) {
 
     setSpinning(true)
     setPrize(null)
-    setTimeLeft(60)
-    setSpinPhase('⚡ HYPER SPEED')
+    setTimeLeft(15)
+    setSpinPhase('🚀 VERY FAST')
 
     audioEngine.enableAudio()
     audioEngine.playBoom()
+    audioEngine.playFunnyBoing()
 
     // Pick winning index
     const winningIndex = Math.floor(Math.random() * numSlices)
     selectedPrizeRef.current = wheelOptions[winningIndex]
 
     const initialRotation = rotation % 360
-    // Total spins: 45 full rotations (16,200 deg) + offset to land on prize
     const targetSliceAngle = 360 - winningIndex * anglePerSlice - anglePerSlice / 2
-    const totalAngleDelta = 360 * 42 + targetSliceAngle
+    const totalAngleDelta = 360 * 18 + targetSliceAngle
 
     spinStartTimeRef.current = performance.now()
     let lastTickAngle = initialRotation
@@ -87,36 +79,33 @@ export function SpinWheel({ onNext, audioEngine }) {
       const remainingSeconds = Math.max(0, Math.ceil((SPIN_DURATION_MS - elapsed) / 1000))
       setTimeLeft(remainingSeconds)
 
-      // Update Phase HUD
-      if (progress < 0.25) {
-        setSpinPhase('⚡ HYPER SPEED (1800 RPM)')
-      } else if (progress < 0.6) {
-        setSpinPhase('🌀 HIGH VELOCITY CRUISE')
-      } else if (progress < 0.8) {
-        setSpinPhase('⏱️ MEDIUM DECELERATION')
-      } else if (progress < 0.93) {
-        setSpinPhase('⏳ CRITICAL SUSPENSE SLOWDOWN')
+      // Update Phase HUD: VERY FAST (0-4.5s) -> MID (4.5-9s) -> SLOW (9-12.5s) -> END (12.5-15s)
+      if (progress < 0.30) {
+        setSpinPhase('🚀 1. VERY FAST (1800 RPM)')
+      } else if (progress < 0.60) {
+        setSpinPhase('⚡ 2. MID SPEED')
+      } else if (progress < 0.83) {
+        setSpinPhase('🐢 3. SLOW SUSPENSE')
       } else {
-        setSpinPhase('🎯 LOCKING ONTO DESTINY...')
+        setSpinPhase('🎯 4. WIN / LOCKING ON')
       }
 
       // Compute current rotation
       const easeMultiplier = calculateRotation(progress)
-      const currentRot = initialRotation + totalAngleDelta * (easeMultiplier / 1.4235)
+      const currentRot = initialRotation + totalAngleDelta * (easeMultiplier / 1.31)
       setRotation(currentRot)
 
-      // Dynamic Tick Sound (interval adapts to speed)
+      // Dynamic Tick Sound
       if (Math.abs(currentRot - lastTickAngle) >= anglePerSlice) {
         lastTickAngle = currentRot
-        const pitch = Math.max(0.6, 1.4 - progress * 0.7)
-        const volume = Math.max(0.1, 0.35 - progress * 0.15)
+        const pitch = Math.max(0.6, 1.4 - progress * 0.75)
+        const volume = Math.max(0.12, 0.42 - progress * 0.18)
         audioEngine.playDynamicTick(pitch, volume)
       }
 
       if (progress < 1) {
         spinAnimationFrameRef.current = requestAnimationFrame(animateWheel)
       } else {
-        // Complete 1-minute spin
         finishSpin()
       }
     }
@@ -124,7 +113,6 @@ export function SpinWheel({ onNext, audioEngine }) {
     spinAnimationFrameRef.current = requestAnimationFrame(animateWheel)
   }
 
-  // Fast forward / instant stop
   const handleFastForward = () => {
     if (!spinning) return
     cancelAnimationFrame(spinAnimationFrameRef.current)
@@ -133,19 +121,23 @@ export function SpinWheel({ onNext, audioEngine }) {
 
   const finishSpin = () => {
     setSpinning(false)
-    setSpinPhase('🏆 DESTINY UNLOCKED')
+    setSpinPhase('🏆 WINNER! DESTINY UNLOCKED')
     setTimeLeft(0)
 
     const winner = selectedPrizeRef.current || wheelOptions[0]
     setPrize(winner)
-    audioEngine.playFanfare()
 
-    // Supernova Confetti Storm
+    // Play Grand Win Celebration Sound & Birthday Fanfare
+    audioEngine.playWinCelebration()
+    setTimeout(() => {
+      audioEngine.playFanfare()
+    }, 450)
+
     confetti({
-      particleCount: 150,
-      spread: 120,
+      particleCount: 200,
+      spread: 140,
       origin: { y: 0.55 },
-      colors: ['#FBBF24', '#EC4899', '#7C3AED', '#22D3EE', '#FFFFFF', '#10B981'],
+      colors: ['#F59E0B', '#EC4899', '#9333EA', '#06B6D4', '#FFFFFF', '#10B981'],
     })
   }
 
@@ -154,14 +146,15 @@ export function SpinWheel({ onNext, audioEngine }) {
       if (spinAnimationFrameRef.current) {
         cancelAnimationFrame(spinAnimationFrameRef.current)
       }
-      if (tickTimerRef.current) {
-        clearInterval(tickTimerRef.current)
-      }
     }
   }, [])
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-center p-6 py-20 select-none overflow-hidden">
+      {/* Ambient Radial Lights */}
+      <div className="absolute w-[500px] h-[500px] rounded-full bg-amber-500/15 blur-[150px] pointer-events-none -top-20 -right-20 animate-pulse-glow" />
+      <div className="absolute w-[500px] h-[500px] rounded-full bg-purple-600/20 blur-[150px] pointer-events-none -bottom-20 -left-20 animate-pulse-glow" />
+
       <div className="max-w-2xl w-full z-20 space-y-6 text-center">
         {/* Header */}
         <motion.div
@@ -171,23 +164,23 @@ export function SpinWheel({ onNext, audioEngine }) {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs tracking-widest text-amber-300 border border-amber-500/30">
             <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-            <span>Chapter 07: 1-Minute Epic Spinner Game</span>
+            <span>Chapter 06: 15-Second Epic Spinner Game</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black font-cinzel text-white text-glow-gold">
             Spin The Surprise 🎡
           </h2>
 
-          <p className="text-zinc-300 text-sm sm:text-base max-w-md mx-auto">
-            A real 1-minute thrilling journey from supersonic speed down to the final winning reward for Sai!
+          <p className="text-zinc-200 text-sm sm:text-base max-w-md mx-auto">
+            A 15-second thrill ride: <span className="text-amber-300 font-bold">Very Fast</span> ➔ <span className="text-pink-300 font-bold">Mid</span> ➔ <span className="text-cyan-300 font-bold">Slow</span> ➔ <span className="text-emerald-300 font-bold">End/Win</span>!
           </p>
         </motion.div>
 
-        {/* Dynamic 1-Minute Countdown & Stage HUD */}
+        {/* Dynamic 15-Second Countdown & Stage HUD */}
         <div className="flex items-center justify-center gap-3 flex-wrap">
           <div className="flex items-center gap-2 px-4 py-2 rounded-2xl glass-panel border border-amber-400/40 text-amber-300 text-sm font-mono font-bold shadow-lg glow-gold">
-            <Clock className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: spinning ? '2s' : '10s' }} />
-            <span>{spinning ? `00:${timeLeft.toString().padStart(2, '0')}s remaining` : '60 Seconds Epic Spin'}</span>
+            <Clock className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: spinning ? '1.5s' : '10s' }} />
+            <span>{spinning ? `00:${timeLeft.toString().padStart(2, '0')}s remaining` : '15 Seconds Epic Spin'}</span>
           </div>
 
           <div className="px-4 py-2 rounded-2xl glass-panel border border-pink-500/40 text-pink-300 text-xs font-bold uppercase tracking-wider">
@@ -216,7 +209,7 @@ export function SpinWheel({ onNext, audioEngine }) {
           </div>
 
           {/* Outer Glowing Ring */}
-          <div className="relative p-3 rounded-full glass-panel border-4 border-amber-400/60 glow-gold shadow-2xl">
+          <div className="relative p-3.5 rounded-full glass-panel border-4 border-amber-400/60 glow-gold shadow-2xl">
             <div
               className="w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden relative shadow-inner"
               style={{
@@ -240,8 +233,8 @@ export function SpinWheel({ onNext, audioEngine }) {
                       key={i}
                       d={pathData}
                       fill={opt.color}
-                      stroke="#050505"
-                      strokeWidth="0.75"
+                      stroke="#0a0614"
+                      strokeWidth="0.8"
                     />
                   )
                 })}
@@ -277,7 +270,7 @@ export function SpinWheel({ onNext, audioEngine }) {
                   : 'hover:scale-110 active:scale-90 glow-gold hover:border-pink-400'
               }`}
             >
-              <span className="text-xs sm:text-sm">{spinning ? 'SPINNING' : 'START 1-MIN'}</span>
+              <span className="text-xs sm:text-sm">{spinning ? 'SPINNING' : 'START 15S'}</span>
               <span className="text-sm sm:text-base">🎡</span>
             </button>
           </div>
@@ -295,10 +288,11 @@ export function SpinWheel({ onNext, audioEngine }) {
               audioEngine.playFanfare()
               onNext()
             }}
-            className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-amber-500 hover:scale-105 font-bold text-white text-base sm:text-lg shadow-xl shadow-pink-500/30 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
+            onMouseEnter={() => audioEngine.playFunnyClick()}
+            className="group px-9 py-4 rounded-2xl btn-luxury-gold font-black text-white text-base sm:text-lg shadow-2xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
           >
             <span>LAUNCH GRAND BIRTHDAY FINALE 🎂🚀</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
           </button>
         </motion.div>
       </div>
@@ -329,7 +323,7 @@ export function SpinWheel({ onNext, audioEngine }) {
 
               <div className="space-y-1">
                 <span className="text-xs font-mono uppercase tracking-widest text-pink-400 font-bold">
-                  1-Minute Destiny Locked for Sai
+                  15-Second Destiny Locked for Sai
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black font-cinzel text-white text-glow-gold">
                   {prize.text}
@@ -346,7 +340,7 @@ export function SpinWheel({ onNext, audioEngine }) {
                   audioEngine.playFanfare()
                   onNext()
                 }}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-pink-600 to-purple-600 text-white font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                className="w-full py-4 rounded-2xl btn-luxury-gold text-white font-black text-sm uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-transform cursor-pointer"
               >
                 Claim Prize & Enter Grand Finale 🎂🎉
               </button>

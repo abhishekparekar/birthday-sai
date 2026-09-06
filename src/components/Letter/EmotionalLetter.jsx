@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Heart, ArrowRight, Sparkles, ScrollText } from 'lucide-react'
+import { Heart, ArrowRight, ScrollText } from 'lucide-react'
 import { birthdayData } from '../../data/birthdayData'
 
 export function EmotionalLetter({ onNext, audioEngine }) {
@@ -8,6 +8,7 @@ export function EmotionalLetter({ onNext, audioEngine }) {
   const { letter } = birthdayData
 
   const handleOpenLetter = () => {
+    audioEngine.enableAudio()
     audioEngine.playEmotionalChord()
     setIsOpen(true)
   }
@@ -130,13 +131,15 @@ export function EmotionalLetter({ onNext, audioEngine }) {
           >
             <button
               onClick={() => {
-                audioEngine.playScratch()
+                audioEngine.playFunnyClick()
+                audioEngine.playBoom()
                 onNext()
               }}
-              className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-amber-500 hover:scale-105 font-bold text-white text-base sm:text-lg shadow-xl shadow-pink-500/30 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
+              onMouseEnter={() => audioEngine.playFunnyClick()}
+              className="group px-9 py-4 rounded-2xl btn-luxury-gold font-black text-white text-base sm:text-lg shadow-2xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
             >
-              <span>ENTER THE ROAST ZONE 😂😈</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span>ENTER THE 15-SEC SUSPENSE SPINNER 🎡</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
             </button>
           </motion.div>
         )}

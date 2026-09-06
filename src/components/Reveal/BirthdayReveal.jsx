@@ -67,6 +67,13 @@ export function BirthdayReveal({ onNext, audioEngine }) {
             {nameLetters.map((char, index) => (
               <motion.span
                 key={index}
+                onClick={() => {
+                  audioEngine.playFunnySmile()
+                  audioEngine.playPop()
+                }}
+                onMouseEnter={() => audioEngine.playFunnyBoing()}
+                whileHover={{ scale: 1.25, rotate: (index % 2 === 0 ? 8 : -8) }}
+                whileTap={{ scale: 0.85 }}
                 initial={{ opacity: 0, y: 50, rotate: -15, scale: 0.5 }}
                 animate={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
                 transition={{
@@ -75,7 +82,7 @@ export function BirthdayReveal({ onNext, audioEngine }) {
                   type: 'spring',
                   stiffness: 200,
                 }}
-                className="text-5xl sm:text-8xl md:text-9xl font-black font-cinzel text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-amber-600 text-glow-gold drop-shadow-2xl"
+                className="text-5xl sm:text-8xl md:text-9xl font-black font-cinzel text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-amber-600 text-glow-gold drop-shadow-2xl cursor-pointer select-none"
               >
                 {char}
               </motion.span>
@@ -102,17 +109,17 @@ export function BirthdayReveal({ onNext, audioEngine }) {
         >
           <button
             onClick={() => {
+              audioEngine.playFunnyClick()
               audioEngine.playMagic()
               onNext()
             }}
-            onMouseEnter={() => audioEngine.playPop()}
-            className="group relative inline-flex items-center gap-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 font-bold text-white text-lg sm:text-xl shadow-2xl shadow-pink-500/30 hover:shadow-pink-500/60 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer overflow-hidden"
+            onMouseEnter={() => audioEngine.playFunnyClick()}
+            className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-2xl btn-luxury-gold font-black text-white text-lg sm:text-xl shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
           >
-            <span className="relative z-10 flex items-center gap-3">
+            <span className="relative z-10 flex items-center gap-3 text-glow-gold">
               <span>{celebration.cta}</span>
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" />
             </span>
-            <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
         </motion.div>
       </div>

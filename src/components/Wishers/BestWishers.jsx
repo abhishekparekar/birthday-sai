@@ -9,6 +9,7 @@ export function BestWishers({ onNext, audioEngine }) {
   const { wishers } = birthdayData
 
   const handleLike = (id) => {
+    audioEngine.playFunnySmile()
     audioEngine.playPop()
     setLikes((prev) => ({
       ...prev,
@@ -16,10 +17,10 @@ export function BestWishers({ onNext, audioEngine }) {
     }))
 
     confetti({
-      particleCount: 25,
-      spread: 60,
+      particleCount: 30,
+      spread: 70,
       origin: { y: 0.7 },
-      colors: ['#EC4899', '#FBBF24', '#7C3AED'],
+      colors: ['#EC4899', '#FBBF24', '#7C3AED', '#22D3EE'],
     })
   }
 
@@ -92,18 +93,21 @@ export function BestWishers({ onNext, audioEngine }) {
               {/* Like / Love interaction */}
               <div className="flex items-center justify-between pt-1">
                 <button
-                  onClick={() => handleLike(item.id)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-panel text-xs font-semibold text-pink-300 hover:text-white border border-pink-500/30 hover:bg-pink-600/20 transition-all cursor-pointer group-hover:scale-105"
+                  onClick={() => {
+                    audioEngine.playFunnyClick()
+                    handleLike(item.id)
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-panel text-xs font-bold text-pink-300 hover:text-white border border-pink-500/40 hover:bg-pink-600/30 transition-all cursor-pointer group-hover:scale-105 shadow-md glow-pink"
                 >
                   <Heart className="w-3.5 h-3.5 fill-pink-500 text-pink-500 animate-pulse" />
                   <span>Send Love</span>
                   {(likes[item.id] || 0) > 0 && (
-                    <span className="ml-1 text-[11px] font-bold text-amber-300 bg-pink-950/60 px-1.5 py-0.2 rounded-full">
+                    <span className="ml-1 text-[11px] font-bold text-amber-300 bg-pink-950/80 px-2 py-0.5 rounded-full border border-pink-400/40">
                       +{likes[item.id]}
                     </span>
                   )}
                 </button>
-                <span className="text-[11px] font-mono text-zinc-500">7th Sept 2026</span>
+                <span className="text-[11px] font-mono text-amber-300/60">7th Sept 2026</span>
               </div>
             </motion.div>
           ))}
@@ -118,13 +122,15 @@ export function BestWishers({ onNext, audioEngine }) {
         >
           <button
             onClick={() => {
+              audioEngine.playFunnyClick()
               audioEngine.playEmotionalChord()
               onNext()
             }}
-            className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:scale-105 font-bold text-white text-base sm:text-lg shadow-xl shadow-purple-500/30 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
+            onMouseEnter={() => audioEngine.playFunnyClick()}
+            className="group px-9 py-4 rounded-2xl btn-luxury-gold font-black text-white text-base sm:text-lg shadow-2xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
           >
             <span>READ THE HEARTFELT BLESSINGS 📜</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
           </button>
         </motion.div>
       </div>

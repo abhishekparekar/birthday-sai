@@ -130,31 +130,38 @@ export function GrandFinale({ onRestart, audioEngine }) {
           {/* One Last Message CTA */}
           <button
             onClick={() => {
+              audioEngine.playFunnyClick()
               audioEngine.playEmotionalChord()
               setShowLastModal(true)
             }}
-            className="group px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 font-bold text-white text-base sm:text-lg shadow-xl shadow-pink-500/30 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
+            onMouseEnter={() => audioEngine.playFunnyClick()}
+            className="group px-9 py-4 rounded-2xl btn-luxury-gold font-black text-white text-base sm:text-lg shadow-2xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
           >
-            <Heart className="w-5 h-5 text-pink-200 fill-pink-200 group-hover:scale-110 transition-transform" />
+            <Heart className="w-5 h-5 text-white fill-white group-hover:scale-120 transition-transform" />
             <span>{grandFinale.lastMessage.title}</span>
           </button>
 
           {/* Toggle Music */}
           <button
-            onClick={() => setIsPlayingMusic((prev) => !prev)}
-            className="px-6 py-4 rounded-2xl glass-panel hover:bg-amber-500/20 border border-amber-400/40 text-amber-300 font-bold text-base hover:scale-105 transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
+            onClick={() => {
+              audioEngine.playFunnyClick()
+              setIsPlayingMusic((prev) => !prev)
+            }}
+            onMouseEnter={() => audioEngine.playPop()}
+            className="px-6 py-4 rounded-2xl glass-panel hover:bg-amber-500/20 border border-amber-400/40 text-amber-300 font-bold text-base hover:scale-105 transition-all duration-300 cursor-pointer inline-flex items-center gap-2 shadow-lg glow-gold"
           >
-            <Music className="w-5 h-5" />
+            <Music className="w-5 h-5 animate-pulse" />
             <span>{isPlayingMusic ? 'Pause Song ⏸️' : 'Play Song 🎵'}</span>
           </button>
 
           {/* Replay Entire Experience */}
           <button
             onClick={() => {
-              audioEngine.playPop()
+              audioEngine.playFunnyClick()
               onRestart()
             }}
-            className="px-6 py-4 rounded-2xl glass-panel hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white font-semibold text-base transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
+            onMouseEnter={() => audioEngine.playPop()}
+            className="px-6 py-4 rounded-2xl glass-panel hover:bg-white/15 border border-white/20 text-zinc-200 hover:text-white font-bold text-base transition-all duration-300 cursor-pointer inline-flex items-center gap-2 shadow-lg"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Replay Surprise</span>
