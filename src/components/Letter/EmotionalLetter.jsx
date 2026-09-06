@@ -75,7 +75,7 @@ export function EmotionalLetter({ onNext, audioEngine }) {
               खूप साऱ्या शुभेच्छा आणि आशीर्वाद! ❤️
             </p>
             <p className="text-lg sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 tracking-wide font-cinzel text-glow-gold pt-1">
-              — Laxman Sodanwar ❤️
+              —Reshma & Laxman Sodanwar ❤️
             </p>
           </div>
         </motion.div>

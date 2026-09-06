@@ -43,25 +43,23 @@ export function BirthdayReveal({ onNext, audioEngine }) {
           initial={{ opacity: 0, x: -40, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
-          className="lg:col-span-5 flex flex-col items-center justify-center"
+          className="lg:col-span-5 flex flex-col items-center justify-center order-1 lg:order-1"
         >
-          <div className="relative group w-full max-w-[300px] sm:max-w-[340px] lg:max-w-[360px]">
+          <div className="relative group w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[500px]">
             {/* Glowing Aura Ring */}
             <div className="absolute -inset-4 bg-gradient-to-r from-amber-400 via-pink-500 to-purple-600 rounded-3xl blur-2xl opacity-75 group-hover:opacity-100 transition duration-700 animate-pulse-glow" />
 
-            {/* Photo Container */}
+            {/* Borderless Photo Container */}
             <motion.div
-              animate={{ y: [-6, 6, -6], rotate: [-0.5, 0.5, -0.5] }}
+              animate={{ y: [-4, 4, -4] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative rounded-3xl p-3 sm:p-4 glass-panel border-2 border-amber-400/50 shadow-2xl glow-gold overflow-hidden w-full"
+              className="relative rounded-3xl overflow-hidden shadow-2xl w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[72vh] sm:max-h-[78vh] lg:max-h-[82vh]"
             >
-              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-zinc-950 border border-amber-400/40 shadow-inner">
-                <img
-                  src={sai3Img}
-                  alt="Sai"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
+              <img
+                src={sai3Img}
+                alt="Sai"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
             </motion.div>
           </div>
         </motion.div>
@@ -71,7 +69,7 @@ export function BirthdayReveal({ onNext, audioEngine }) {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="lg:col-span-7 space-y-5 text-center lg:text-left flex flex-col items-center lg:items-start justify-center"
+          className="lg:col-span-7 space-y-5 text-center lg:text-left flex flex-col items-center lg:items-start justify-center order-2 lg:order-2"
         >
           {/* Marathi Birthday Wishes Heading */}
           <div className="space-y-2">
@@ -114,7 +112,6 @@ export function BirthdayReveal({ onNext, audioEngine }) {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="space-y-2.5 max-w-xl"
           >
-           
             <p className="text-sm sm:text-base text-zinc-200 font-light leading-relaxed">
               तुझ्या आयुष्यातील प्रत्येक दिवस नव्या यशाची, सुखाची आणि समाधानाची नवी पहाट घेऊन येवो! 🌸✨
             </p>
@@ -129,12 +126,12 @@ export function BirthdayReveal({ onNext, audioEngine }) {
           >
             <button
               onClick={onNext}
-              className="group relative inline-flex items-center gap-3 px-9 sm:px-11 py-3.5 sm:py-4 rounded-2xl btn-luxury-gold font-black text-white text-base sm:text-lg shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden hover:scale-105 active:scale-95 glow-gold"
+              className="group relative inline-flex items-center justify-center gap-2.5 px-8 sm:px-11 py-3.5 sm:py-4 rounded-2xl btn-luxury-gold font-black text-white text-sm sm:text-base md:text-lg shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden hover:scale-105 active:scale-95 glow-gold"
             >
               <span className="relative z-10 flex items-center gap-2.5 text-glow-gold">
-                <span>READ BLESSINGS LETTER</span>
-                <span className="text-lg">📜✨</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+                <span>Happy Birthday See Msg</span>
+                <span className="text-base sm:text-lg">📜✨</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
               </span>
             </button>
           </motion.div>

@@ -78,7 +78,7 @@ export const birthdayData = {
     closing: "Happy Birthday! 🎂",
     wishes: "खूप साऱ्या शुभेच्छा आणि आशीर्वाद! ❤️",
     author: "Laxman Sodanwar",
-    signature: "— Laxman Sodanwar ❤️",
+    signature: "—Reshma & Laxman Sodanwar ❤️",
   },
 
   // Screen 06 - Funny Roast Zone
