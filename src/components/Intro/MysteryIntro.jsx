@@ -58,11 +58,14 @@ export function MysteryIntro({ onNext, audioEngine }) {
     audioEngine.enableAudio()
     audioEngine.playFunnyLaugh()
 
-    // Pick distinct leap coordinate
+    // Dynamically scale bounding coordinates for mobile screens (< 640px)
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640
+    const scale = isMobile ? 0.35 : 1.0
+
     const target = ESCAPE_POSITIONS[escapeCount % ESCAPE_POSITIONS.length]
-    const jitterX = (Math.random() - 0.5) * 30
-    const jitterY = (Math.random() - 0.5) * 20
-    setContinuePos({ x: target.x + jitterX, y: target.y + jitterY })
+    const jitterX = (Math.random() - 0.5) * (isMobile ? 12 : 30)
+    const jitterY = (Math.random() - 0.5) * (isMobile ? 10 : 20)
+    setContinuePos({ x: (target.x + jitterX) * scale, y: (target.y + jitterY) * scale })
 
     const msgIndex = escapeCount % TROLL_MESSAGES.length
     setTrollMsg(TROLL_MESSAGES[msgIndex])

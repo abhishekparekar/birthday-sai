@@ -209,9 +209,9 @@ export function SpinWheel({ onNext, audioEngine }) {
           </div>
 
           {/* Outer Glowing Ring */}
-          <div className="relative p-3.5 rounded-full glass-panel border-4 border-amber-400/60 glow-gold shadow-2xl">
+          <div className="relative p-2.5 sm:p-3.5 rounded-full glass-panel border-4 border-amber-400/60 glow-gold shadow-2xl">
             <div
-              className="w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden relative shadow-inner"
+              className="w-[260px] h-[260px] xs:w-72 xs:h-72 sm:w-96 sm:h-96 max-w-[82vw] max-h-[82vw] rounded-full overflow-hidden relative shadow-inner"
               style={{
                 transform: `rotate(${rotation}deg)`,
                 willChange: 'transform',

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useAudioEngine } from './hooks/useAudioEngine'
 import { ParticleCanvas } from './components/common/ParticleCanvas'
 import { FireworksCanvas } from './components/common/FireworksCanvas'
-import { SoundToggle } from './components/common/SoundToggle'
 import { ProgressNav } from './components/common/ProgressNav'
 
 import { SuspenseLoader } from './components/common/SuspenseLoader'
@@ -73,11 +72,8 @@ export default function App() {
       </AnimatePresence>
 
       {/* Background Ambience */}
-      <ParticleCanvas speed={0.8} density={50} />
+      <ParticleCanvas speed={0.8} density={40} />
       <FireworksCanvas active={currentStep === 2 || currentStep === 6} />
-
-      {/* Persistent Audio Controls */}
-      <SoundToggle isMuted={audioEngine.isMuted} onToggle={audioEngine.toggleMute} />
 
       {/* Screen Router with cinematic slide/fade transitions */}
       <div className="relative w-full z-10">
