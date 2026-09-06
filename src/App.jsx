@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useAudioEngine } from './hooks/useAudioEngine'
 import { ParticleCanvas } from './components/common/ParticleCanvas'
 import { FireworksCanvas } from './components/common/FireworksCanvas'
-import { ThreeCakeCanvas } from './components/common/ThreeCakeCanvas'
+import { ThreeSpaceCanvas } from './components/common/ThreeSpaceCanvas'
 import { ProgressNav } from './components/common/ProgressNav'
 
 import { SuspenseLoader } from './components/common/SuspenseLoader'
@@ -64,7 +64,7 @@ export default function App() {
   }, [currentStep])
 
   return (
-    <main className="relative min-h-screen w-full bg-gradient-to-b from-[#150a2a] via-[#0d051c] to-[#06020c] text-white flex flex-col justify-center items-center overflow-x-hidden">
+    <main className="relative min-h-screen w-full bg-gradient-to-b from-[#04081c] via-[#020514] to-[#010208] text-white flex flex-col justify-center items-center overflow-x-hidden">
       {/* 5-Second Initial Suspense Loading */}
       <AnimatePresence>
         {isLoading && (
@@ -72,11 +72,11 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 🎂 Cinematic 3D Birthday Cake Rises Background */}
-      <ThreeCakeCanvas />
+      {/* 🌌 Cinematic "Blue & Night" 3D Space Background */}
+      <ThreeSpaceCanvas />
 
       {/* Background Ambience */}
-      <ParticleCanvas speed={0.8} density={40} />
+      <ParticleCanvas speed={0.8} density={40} colors={['#38BDF8', '#60A5FA', '#93C5FD', '#FBBF24', '#FFFFFF']} />
       <FireworksCanvas active={currentStep === 2 || currentStep === 6} />
 
       {/* Screen Router with cinematic slide/fade transitions */}

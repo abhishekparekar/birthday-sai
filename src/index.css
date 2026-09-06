@@ -2,17 +2,18 @@
 
 @layer base {
   :root {
-    --color-bg-primary: #0a0614;
-    --color-bg-secondary: #130a2a;
-    --color-purple: #9333ea;
-    --color-pink: #ec4899;
+    --color-bg-primary: #020617;
+    --color-bg-secondary: #0b132b;
+    --color-blue: #3b82f6;
+    --color-cyan: #06b6d4;
+    --color-sky: #38bdf8;
     --color-gold: #f59e0b;
     --color-amber: #fbbf24;
-    --color-cyan: #06b6d4;
+    --color-pink: #ec4899;
   }
 
   body {
-    background: radial-gradient(circle at 50% 0%, #1e0b36 0%, #0d061a 50%, #06020c 100%);
+    background: radial-gradient(circle at 50% 0%, #0c1844 0%, #04081c 50%, #010208 100%);
     color: #ffffff;
     font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
