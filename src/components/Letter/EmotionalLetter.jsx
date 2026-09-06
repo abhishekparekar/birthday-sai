@@ -20,7 +20,7 @@ export function EmotionalLetter({ onNext, audioEngine }) {
         >
           <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full glass-panel text-xs sm:text-sm tracking-wider text-amber-300 border border-amber-500/40 glow-gold shadow-sm">
             <ScrollText className="w-3.5 h-3.5 text-amber-400" />
-            <span className="font-bold">Chapter 03: मनःपूर्वक शुभेच्छा पत्र 📜</span>
+            <span className="font-bold">Chapter 02: मनःपूर्वक शुभेच्छा पत्र 📜</span>
           </div>
         </motion.div>
 
@@ -67,10 +67,15 @@ export function EmotionalLetter({ onNext, audioEngine }) {
           </div>
 
           {/* Signature & Closing */}
-          <div className="border-t border-amber-400/20 pt-3 space-y-0.5 text-right">
-            <p className="text-xs sm:text-sm font-bold text-amber-300 font-cinzel">{letter.closing}</p>
-            <p className="text-base sm:text-xl md:text-2xl text-pink-400 font-black tracking-wide text-glow-pink">
-              {letter.signature}
+          <div className="border-t border-amber-400/20 pt-3.5 space-y-1 text-right">
+            <p className="text-xs sm:text-sm font-bold text-amber-300 font-cinzel tracking-wider">
+              HAPPY BIRTHDAY! 🎂
+            </p>
+            <p className="text-base sm:text-xl text-pink-300 font-bold text-glow-pink">
+              खूप साऱ्या शुभेच्छा आणि आशीर्वाद! ❤️
+            </p>
+            <p className="text-lg sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-300 to-amber-400 tracking-wide font-cinzel text-glow-gold pt-1">
+              — Laxman Sodanwar ❤️
             </p>
           </div>
         </motion.div>

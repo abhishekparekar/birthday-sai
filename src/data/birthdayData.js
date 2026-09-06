@@ -76,7 +76,9 @@ export const birthdayData = {
       "तुला आयुष्यात यश, समाधान, उत्तम माणसं आणि तुझ्या स्वप्नांना गवसणी घालण्याचं बळ मिळो.",
     ],
     closing: "Happy Birthday! 🎂",
-    signature: "खूप साऱ्या शुभेच्छा आणि आशीर्वाद! ❤️",
+    wishes: "खूप साऱ्या शुभेच्छा आणि आशीर्वाद! ❤️",
+    author: "Laxman Sodanwar",
+    signature: "— Laxman Sodanwar ❤️",
   },
 
   // Screen 06 - Funny Roast Zone

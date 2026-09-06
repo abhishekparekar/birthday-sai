@@ -1,9 +1,8 @@
 import { Check } from 'lucide-react'
 
-export function ProgressNav({ currentStep, totalSteps = 4, unlockedSteps = [0], onSelectStep }) {
+export function ProgressNav({ currentStep, totalSteps = 3, unlockedSteps = [0], onSelectStep }) {
   const stepsLabels = [
     'Happy Birthday Sai',
-    'Best Wishers Circle',
     'Marathi Blessings',
     'Grand Finale Celebration',
   ]
