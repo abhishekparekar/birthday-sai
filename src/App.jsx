@@ -6,13 +6,12 @@ import { FireworksCanvas } from './components/common/FireworksCanvas'
 import { ThreeSpaceCanvas } from './components/common/ThreeSpaceCanvas'
 import { ProgressNav } from './components/common/ProgressNav'
 
-import { MysteryIntro } from './components/Intro/MysteryIntro'
 import { BirthdayReveal } from './components/Reveal/BirthdayReveal'
 import { BestWishers } from './components/Wishers/BestWishers'
 import { EmotionalLetter } from './components/Letter/EmotionalLetter'
 import { GrandFinale } from './components/Finale/GrandFinale'
 
-const TOTAL_STEPS = 5
+const TOTAL_STEPS = 4
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0)
@@ -62,7 +61,7 @@ export default function App() {
 
       {/* Background Ambience */}
       <ParticleCanvas speed={0.8} density={40} colors={['#38BDF8', '#60A5FA', '#93C5FD', '#FBBF24', '#FFFFFF']} />
-      <FireworksCanvas active={currentStep === 1 || currentStep === 4} />
+      <FireworksCanvas active={currentStep === 0 || currentStep === 3} />
 
       {/* Screen Router with cinematic slide/fade transitions */}
       <div className="relative w-full z-10">
@@ -70,13 +69,13 @@ export default function App() {
           {currentStep === 0 && (
             <motion.section
               key="step-0"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.04 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <MysteryIntro onNext={handleNextStep} audioEngine={audioEngine} />
+              <BirthdayReveal onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
@@ -89,7 +88,7 @@ export default function App() {
               transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <BirthdayReveal onNext={handleNextStep} audioEngine={audioEngine} />
+              <BestWishers onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
@@ -102,26 +101,13 @@ export default function App() {
               transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <BestWishers onNext={handleNextStep} audioEngine={audioEngine} />
+              <EmotionalLetter onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
           {currentStep === 3 && (
             <motion.section
               key="step-3"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-              className="w-full"
-            >
-              <EmotionalLetter onNext={handleNextStep} audioEngine={audioEngine} />
-            </motion.section>
-          )}
-
-          {currentStep === 4 && (
-            <motion.section
-              key="step-4"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}

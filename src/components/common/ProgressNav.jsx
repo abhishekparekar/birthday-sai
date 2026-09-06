@@ -1,8 +1,7 @@
 import { Check } from 'lucide-react'
 
-export function ProgressNav({ currentStep, totalSteps = 5, unlockedSteps = [0], onSelectStep }) {
+export function ProgressNav({ currentStep, totalSteps = 4, unlockedSteps = [0], onSelectStep }) {
   const stepsLabels = [
-    'The Cosmic Intro',
     'Happy Birthday Sai',
     'Best Wishers Circle',
     'Marathi Blessings',
@@ -10,7 +9,7 @@ export function ProgressNav({ currentStep, totalSteps = 5, unlockedSteps = [0], 
   ]
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 px-4 py-2 rounded-full glass-panel border border-white/10 shadow-2xl max-w-[95vw] overflow-x-auto">
+    <div className="fixed bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full glass-panel border border-white/10 shadow-2xl max-w-[95vw] no-scrollbar">
       {Array.from({ length: totalSteps }).map((_, index) => {
         const isCurrent = currentStep === index
         const isUnlocked = unlockedSteps.includes(index)

@@ -12,12 +12,22 @@
     --color-pink: #ec4899;
   }
 
-  body {
+  html, body {
     background: radial-gradient(circle at 50% 0%, #0c1844 0%, #04081c 50%, #010208 100%);
     color: #ffffff;
     font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   h1, h2, .font-cinzel {

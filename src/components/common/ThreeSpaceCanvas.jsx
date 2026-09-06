@@ -610,26 +610,21 @@ export function ThreeSpaceCanvas({ currentStep = 0, isLoading = false }) {
       let targetCamZ = 10.0
 
       if (step === 0) {
-        // Deep Space & Distant Sun
-        targetCamX = Math.sin(elapsed * 0.2) * 1.5
-        targetCamY = 1.8 + Math.cos(elapsed * 0.15) * 0.5
-        targetCamZ = window.innerWidth < 640 ? 12.5 : 10.5
-      } else if (step === 1) {
         // Grand Birthday Reveal & Cosmic Heart
         targetCamX = 0
         targetCamY = 1.4
         targetCamZ = window.innerWidth < 640 ? 9.5 : 8.0
-      } else if (step === 2) {
+      } else if (step === 1) {
         // Best Wishers & Planetary System
         targetCamX = -1.6
         targetCamY = 1.8
         targetCamZ = window.innerWidth < 640 ? 11.0 : 9.2
-      } else if (step === 3) {
+      } else if (step === 2) {
         // Marathi Blessings & The Moon
         targetCamX = 1.8
         targetCamY = 1.0
         targetCamZ = window.innerWidth < 640 ? 10.5 : 8.8
-      } else if (step === 4) {
+      } else if (step === 3) {
         // Grand Finale: 3D Cake Rises & Fireworks Celebration
         targetCamX = 0
         targetCamY = 2.0
@@ -708,8 +703,8 @@ export function ThreeSpaceCanvas({ currentStep = 0, isLoading = false }) {
         }
       })
 
-      // 15.7 3D Fireworks Particle Burst in Grand Reveal (step 1) & Grand Finale (step 4)
-      if (step === 1 || step === 4) {
+      // 15.7 3D Fireworks Particle Burst in Grand Reveal (step 0) & Grand Finale (step 3)
+      if (step === 0 || step === 3) {
         fireworksMesh.visible = true
         const posAttr = fireworksMesh.geometry.attributes.position
         for (let i = 0; i < fireworksCount; i++) {
