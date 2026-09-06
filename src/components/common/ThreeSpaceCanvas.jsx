@@ -609,51 +609,36 @@ export function ThreeSpaceCanvas({ currentStep = 0, isLoading = false }) {
       let targetCamY = 1.5
       let targetCamZ = 10.0
 
-      if (isLoadingScreen) {
-        // Warp flight through deep space during 5-sec Loading
-        targetCamX = Math.sin(elapsed * 0.8) * 0.8
-        targetCamY = 1.2 + Math.cos(elapsed * 0.6) * 0.4
-        targetCamZ = window.innerWidth < 640 ? 14.5 : 12.5
-      } else if (step === 0) {
+      if (step === 0) {
         // Deep Space & Distant Sun
         targetCamX = Math.sin(elapsed * 0.2) * 1.5
         targetCamY = 1.8 + Math.cos(elapsed * 0.15) * 0.5
         targetCamZ = window.innerWidth < 640 ? 12.5 : 10.5
       } else if (step === 1) {
-        // Planetary Approach
-        targetCamX = -1.8
-        targetCamY = 1.2
-        targetCamZ = window.innerWidth < 640 ? 11.5 : 9.5
-      } else if (step === 2) {
-        // Saturn & Earth Sunrise
-        targetCamX = 1.5
-        targetCamY = 2.2
-        targetCamZ = window.innerWidth < 640 ? 11.0 : 9.0
-      } else if (step === 3) {
-        // Moon & Wishers
-        targetCamX = 2.0
-        targetCamY = 0.8
-        targetCamZ = window.innerWidth < 640 ? 10.5 : 8.8
-      } else if (step === 4) {
-        // Cosmic Heart Formation
+        // Grand Birthday Reveal & Cosmic Heart
         targetCamX = 0
         targetCamY = 1.4
         targetCamZ = window.innerWidth < 640 ? 9.5 : 8.0
-      } else if (step === 5) {
-        // Magical Portal & 3D Cake Rises
-        targetCamX = 0
+      } else if (step === 2) {
+        // Best Wishers & Planetary System
+        targetCamX = -1.6
         targetCamY = 1.8
         targetCamZ = window.innerWidth < 640 ? 11.0 : 9.2
-      } else if (step === 6) {
-        // Grand Finale Wide Shot
+      } else if (step === 3) {
+        // Marathi Blessings & The Moon
+        targetCamX = 1.8
+        targetCamY = 1.0
+        targetCamZ = window.innerWidth < 640 ? 10.5 : 8.8
+      } else if (step === 4) {
+        // Grand Finale: 3D Cake Rises & Fireworks Celebration
         targetCamX = 0
-        targetCamY = 2.2
-        targetCamZ = window.innerWidth < 640 ? 12.0 : 10.2
+        targetCamY = 2.0
+        targetCamZ = window.innerWidth < 640 ? 12.0 : 10.0
       }
 
-      camera.position.x += (targetCamX - camera.position.x) * (isLoadingScreen ? 0.06 : 0.03)
-      camera.position.y += (targetCamY - camera.position.y) * (isLoadingScreen ? 0.06 : 0.03)
-      camera.position.z += (targetCamZ - camera.position.z) * (isLoadingScreen ? 0.06 : 0.03)
+      camera.position.x += (targetCamX - camera.position.x) * 0.03
+      camera.position.y += (targetCamY - camera.position.y) * 0.03
+      camera.position.z += (targetCamZ - camera.position.z) * 0.03
 
       // 15.2 🌌 Warp Starfield Motion During Loading & Cosmic Travel
       const starPosAttr = starGeo.attributes.position
@@ -723,8 +708,8 @@ export function ThreeSpaceCanvas({ currentStep = 0, isLoading = false }) {
         }
       })
 
-      // 15.7 3D Fireworks Particle Burst in Finale
-      if (step === 2 || step === 6) {
+      // 15.7 3D Fireworks Particle Burst in Grand Reveal (step 1) & Grand Finale (step 4)
+      if (step === 1 || step === 4) {
         fireworksMesh.visible = true
         const posAttr = fireworksMesh.geometry.attributes.position
         for (let i = 0; i < fireworksCount; i++) {

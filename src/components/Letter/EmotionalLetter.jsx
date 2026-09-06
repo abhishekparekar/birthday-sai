@@ -27,7 +27,7 @@ export function EmotionalLetter({ onNext, audioEngine }) {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs tracking-widest text-amber-300 border border-amber-500/30">
             <ScrollText className="w-3.5 h-3.5 text-amber-400" />
-            <span>Chapter 05: Heartfelt Blessing • मनःपूर्वक शुभेच्छा</span>
+            <span>Chapter 04: Heartfelt Blessing • मनःपूर्वक शुभेच्छा</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black font-cinzel text-white text-glow-gold">
             A Letter of Blessings for Sai 📜
@@ -132,13 +132,13 @@ export function EmotionalLetter({ onNext, audioEngine }) {
             <button
               onClick={() => {
                 audioEngine.playFunnyClick()
-                audioEngine.playBoom()
+                audioEngine.playMagic()
                 onNext()
               }}
               onMouseEnter={() => audioEngine.playFunnyClick()}
               className="group px-9 py-4 rounded-2xl btn-luxury-gold font-black text-white text-base sm:text-lg shadow-2xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
             >
-              <span>ENTER THE 15-SEC SUSPENSE SPINNER 🎡</span>
+              <span>ENTER THE GRAND FINALE 👑🎉</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
             </button>
           </motion.div>

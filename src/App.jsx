@@ -6,26 +6,18 @@ import { FireworksCanvas } from './components/common/FireworksCanvas'
 import { ThreeSpaceCanvas } from './components/common/ThreeSpaceCanvas'
 import { ProgressNav } from './components/common/ProgressNav'
 
-import { SuspenseLoader } from './components/common/SuspenseLoader'
 import { MysteryIntro } from './components/Intro/MysteryIntro'
-import { ShockReveal } from './components/Reveal/ShockReveal'
 import { BirthdayReveal } from './components/Reveal/BirthdayReveal'
 import { BestWishers } from './components/Wishers/BestWishers'
 import { EmotionalLetter } from './components/Letter/EmotionalLetter'
-import { SpinWheel } from './components/Wheel/SpinWheel'
 import { GrandFinale } from './components/Finale/GrandFinale'
 
-const TOTAL_STEPS = 7
+const TOTAL_STEPS = 5
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [unlockedSteps, setUnlockedSteps] = useState([0])
   const audioEngine = useAudioEngine()
-
-  const handleLoadingComplete = useCallback(() => {
-    setIsLoading(false)
-  }, [])
 
   // Unlock next step
   const handleNextStep = useCallback(() => {
@@ -65,19 +57,12 @@ export default function App() {
 
   return (
     <main className="relative min-h-screen w-full bg-gradient-to-b from-[#04081c] via-[#020514] to-[#010208] text-white flex flex-col justify-center items-center overflow-x-hidden">
-      {/* 5-Second Initial Suspense Loading */}
-      <AnimatePresence>
-        {isLoading && (
-          <SuspenseLoader onComplete={handleLoadingComplete} audioEngine={audioEngine} />
-        )}
-      </AnimatePresence>
-
-      {/* 🌌 Cinematic "Blue & Night" 3D Space Background with Warp Loading Effect */}
-      <ThreeSpaceCanvas currentStep={currentStep} isLoading={isLoading} />
+      {/* 🌌 Cinematic "Blue & Night" 3D Space Background */}
+      <ThreeSpaceCanvas currentStep={currentStep} />
 
       {/* Background Ambience */}
       <ParticleCanvas speed={0.8} density={40} colors={['#38BDF8', '#60A5FA', '#93C5FD', '#FBBF24', '#FFFFFF']} />
-      <FireworksCanvas active={currentStep === 2 || currentStep === 6} />
+      <FireworksCanvas active={currentStep === 1 || currentStep === 4} />
 
       {/* Screen Router with cinematic slide/fade transitions */}
       <div className="relative w-full z-10">
@@ -98,13 +83,13 @@ export default function App() {
           {currentStep === 1 && (
             <motion.section
               key="step-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <ShockReveal onNext={handleNextStep} audioEngine={audioEngine} />
+              <BirthdayReveal onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
@@ -117,7 +102,7 @@ export default function App() {
               transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <BirthdayReveal onNext={handleNextStep} audioEngine={audioEngine} />
+              <BestWishers onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
@@ -130,39 +115,13 @@ export default function App() {
               transition={{ duration: 0.6 }}
               className="w-full"
             >
-              <BestWishers onNext={handleNextStep} audioEngine={audioEngine} />
+              <EmotionalLetter onNext={handleNextStep} audioEngine={audioEngine} />
             </motion.section>
           )}
 
           {currentStep === 4 && (
             <motion.section
               key="step-4"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-              className="w-full"
-            >
-              <EmotionalLetter onNext={handleNextStep} audioEngine={audioEngine} />
-            </motion.section>
-          )}
-
-          {currentStep === 5 && (
-            <motion.section
-              key="step-5"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-              className="w-full"
-            >
-              <SpinWheel onNext={handleNextStep} audioEngine={audioEngine} />
-            </motion.section>
-          )}
-
-          {currentStep === 6 && (
-            <motion.section
-              key="step-6"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}

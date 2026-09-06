@@ -35,7 +35,7 @@ export function BestWishers({ onNext, audioEngine }) {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs tracking-widest text-amber-300 border border-amber-500/30">
             <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-            <span>Chapter 04: Best Wishers Circle</span>
+            <span>Chapter 03: Best Wishers Circle</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black font-cinzel text-white text-glow-pink">

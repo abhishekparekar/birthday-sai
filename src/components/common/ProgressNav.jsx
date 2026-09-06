@@ -1,14 +1,12 @@
 import { Check } from 'lucide-react'
 
-export function ProgressNav({ currentStep, totalSteps = 7, unlockedSteps = [0], onSelectStep }) {
+export function ProgressNav({ currentStep, totalSteps = 5, unlockedSteps = [0], onSelectStep }) {
   const stepsLabels = [
-    'Mystery Intro',
-    'Shock Reveal',
-    'Grand Reveal',
-    'Best Wishers',
+    'The Cosmic Intro',
+    'Happy Birthday Sai',
+    'Best Wishers Circle',
     'Marathi Blessings',
-    '15-Sec Spinner',
-    'Grand Finale',
+    'Grand Finale Celebration',
   ]
 
   return (
