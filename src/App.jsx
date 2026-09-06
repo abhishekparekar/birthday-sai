@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
-import { ArrowDown, Sparkles, Crown, ArrowUp } from 'lucide-react'
+import { ArrowDown, Crown } from 'lucide-react'
 import { ParticleCanvas } from './components/common/ParticleCanvas'
 import { FireworksCanvas } from './components/common/FireworksCanvas'
 import { ThreeSpaceCanvas } from './components/common/ThreeSpaceCanvas'
@@ -51,10 +51,6 @@ export default function App() {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
     }
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -242,44 +238,6 @@ export default function App() {
               </p>
             </div>
           </motion.div>
-        </section>
-
-        {/* 👑 3. GRAND FINALE SECTION */}
-        <section className="w-full max-w-4xl py-10 sm:py-16 flex flex-col items-center text-center space-y-6 sm:space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-3 sm:space-y-4 w-full"
-          >
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-pink-200 to-amber-300 tracking-wide drop-shadow-md leading-tight">
-              परत एकदा वाढदिवसाच्या मनःपूर्वक शुभेच्छा! ❤️
-            </h2>
-
-            <p className="text-sm sm:text-lg md:text-xl text-zinc-200 font-light max-w-2xl mx-auto leading-relaxed">
-              तुझे आयुष्य सदैव सुख, समृद्धी, उदंड यश आणि समाधानाने उजळून निघो! 🌸✨
-            </p>
-          </motion.div>
-
-          {/* Action Buttons (English) */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <button
-              onClick={triggerConfetti}
-              className="px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl btn-luxury-gold font-black text-white text-sm sm:text-base md:text-lg tracking-wide shadow-2xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2.5 glow-gold hover:scale-105 active:scale-95"
-            >
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>CELEBRATE AGAIN 🎊</span>
-            </button>
-
-            <button
-              onClick={scrollToTop}
-              className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl glass-panel border border-white/20 text-zinc-200 hover:text-white hover:border-amber-400/60 font-bold text-sm sm:text-base md:text-lg shadow-xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2.5 hover:scale-105 active:scale-95"
-            >
-              <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
-              <span>BACK TO TOP ⬆️</span>
-            </button>
-          </div>
         </section>
 
       </div>
