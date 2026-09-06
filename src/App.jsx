@@ -92,14 +92,6 @@ export default function App() {
                       alt="Sai"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-2.5 sm:bottom-3.5 inset-x-2.5 sm:inset-x-3.5 flex items-center justify-between">
-                      <span className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md text-[11px] sm:text-xs font-bold text-amber-300 border border-amber-400/50 flex items-center gap-1.5 shadow-md">
-                        <Crown className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                        <span>Birthday Star</span>
-                      </span>
-                      <span className="text-sm sm:text-base">👑</span>
-                    </div>
                   </div>
                 </motion.div>
               </div>
@@ -153,9 +145,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.9 }}
                 className="space-y-2 sm:space-y-3 max-w-2xl w-full"
               >
-                <p className="text-base sm:text-xl lg:text-2xl text-pink-300 font-semibold text-glow-pink">
-                  आजचा हा दिवस संपूर्ण विश्व आनंदाने साजरा करत आहे! 🚀
-                </p>
+              
                 <p className="text-sm sm:text-base lg:text-lg text-zinc-200 font-light leading-relaxed">
                   तुझ्या आयुष्यातील प्रत्येक दिवस नव्या यशाची, सुखाची आणि समाधानाची नवी पहाट घेऊन येवो! 🌸✨
                 </p>

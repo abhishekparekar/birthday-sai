@@ -61,14 +61,6 @@ export function BirthdayReveal({ onNext, audioEngine }) {
                   alt="Sai"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute bottom-3 inset-x-3 flex items-center justify-between">
-                  <span className="px-3.5 py-1.5 rounded-full bg-black/85 backdrop-blur-md text-xs font-bold text-amber-300 border border-amber-400/50 flex items-center gap-1.5 shadow-md">
-                    <Crown className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                    <span>Birthday Star</span>
-                  </span>
-                  <span className="text-base">👑</span>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -122,9 +114,7 @@ export function BirthdayReveal({ onNext, audioEngine }) {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="space-y-2.5 max-w-xl"
           >
-            <p className="text-base sm:text-xl text-pink-300 font-semibold text-glow-pink">
-              आजचा हा दिवस संपूर्ण विश्व आनंदाने साजरा करत आहे! 🚀
-            </p>
+           
             <p className="text-sm sm:text-base text-zinc-200 font-light leading-relaxed">
               तुझ्या आयुष्यातील प्रत्येक दिवस नव्या यशाची, सुखाची आणि समाधानाची नवी पहाट घेऊन येवो! 🌸✨
             </p>
