@@ -15,13 +15,10 @@ import saiImg from '../../assets/sai3.jpeg'
 
 export function GrandFinale({ onRestart, audioEngine }) {
   const [showLastModal, setShowLastModal] = useState(false)
-  const [isPlayingMusic, setIsPlayingMusic] = useState(true)
+  const [isPlayingMusic, setIsPlayingMusic] = useState(false)
   const { grandFinale, name } = birthdayData
 
   useEffect(() => {
-    // Fanfare sound effect
-    audioEngine.playFanfare()
-
     // Continuous celebration bursts
     const interval = setInterval(() => {
       confetti({
